@@ -1,0 +1,115 @@
+<html>
+    <head>
+        
+        <style>
+        
+            #myCanvas {
+                
+                border: 1px #333 solid;
+            }
+            
+        </style>
+    </head>
+    
+    
+    <body>
+        
+      <canvas id="clock" width="500" height="400" >
+          
+          
+      </canvas>
+    </body>
+    
+    <script>
+    
+      
+        
+
+        
+          
+        
+        function setTime(){  
+            
+            
+         var myCanvas = document.getElementById("clock");
+        
+       var context = myCanvas.getContext("2d");
+        
+        var radius = 200;
+            
+            
+       
+        
+        
+        context.beginPath();
+        context.fillStyle = "#444";
+        
+        
+        
+        context.arc(200,200,radius,0,2*Math.PI);
+        
+        context.fill();
+        
+        
+      
+         for (var i = 1; i< 13; i++){
+           
+           context.fillStyle ="white";
+           
+           context.fillText(i, radius + radius*0.9*Math.sin(2*Math.PI/12*i),radius - (radius*0.9*Math.cos(2*Math.PI/12*i)));
+           
+       }
+       
+       
+        var date = new Date();
+        
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+        
+        var fullhours = hours%12 + minutes/60 + seconds/3600;
+        
+        var hourAngle = fullhours * 2*Math.PI/12;
+        var minutesAngle = minutes * 2*Math.PI/60;
+        var secondAngle = seconds * 2*Math.PI/60;
+        
+        
+        context.moveTo(radius,radius);
+        context.lineTo(radius + radius*0.4*Math.sin(hourAngle),radius - radius*0.4*Math.cos(hourAngle));
+        
+        context.strokeStyle = "white";
+        
+        context.lineWidth = 5;
+        context.stroke();
+        
+        context.moveTo(radius,radius);
+         context.lineTo(radius + radius*0.7*Math.sin(minutesAngle),radius - radius*0.7*Math.cos(minutesAngle));
+        
+        context.strokeStyle = "white";
+        
+        context.lineWidth = 3;
+        context.stroke();
+        
+        
+        
+         context.moveTo(radius,radius);
+         context.lineTo(radius + radius*0.8*Math.sin(secondAngle),radius - radius*0.8*Math.cos(secondAngle));
+        
+        context.strokeStyle = "white";
+        
+        context.lineWidth = 1;
+        context.stroke();    
+            
+        
+         }
+        
+        
+        
+        
+      
+        
+        
+         setInterval(setTime,1000);
+        
+    </script>
+</html>
